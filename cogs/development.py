@@ -11,7 +11,7 @@ class Development(commands.Cog):
     @commands.command(hidden=True)
     @commands.is_owner()
     async def presence(self, ctx, *, text):
-        await self.bot.change_presenec(activity=discord.Game(text))
+        await self.bot.change_presence(activity=discord.Game(text))
         await ctx.send(f'Presence Changed to: {text}')
 
     @commands.group(hidden=True)
