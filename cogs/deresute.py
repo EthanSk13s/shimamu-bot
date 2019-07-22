@@ -14,6 +14,8 @@ class Deresute(commands.Cog):
         client = Kirara()
         raw_rarity = rarity.replace('+', '')    
         card_id = await client.get_id('card_t', f' {name}', raw_rarity, int(release))
+        if '+' in rarity:
+            card_id += 1
         idol = await client.get_card(card_id, en_translate=True)
         url = f"https://starlight.kirara.ca/card/{idol.card_id}"
         
