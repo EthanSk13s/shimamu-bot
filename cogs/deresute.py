@@ -62,11 +62,11 @@ class Deresute(commands.Cog):
     @commands.command()
     async def event(self, ctx):
         client = Kirara()
-        event = await client.get_now('event', en_translate=True)
+        event = await client.get_now('event', en_translate=False)
         current_event = event[0]
 
         currently = datetime.utcnow().timestamp()
-        remaining = ((current_event.end_data + 32400) - currently) - 7200
+        remaining = ((current_event.end_date + 32400) - currently) - 7200
         hours, remainder = divmod(remaining, 3600)
         minutes, seconds = divmod(remainder, 60)
         days, hours = divmod(hours, 24)
@@ -76,7 +76,7 @@ class Deresute(commands.Cog):
 
         embed=discord.Embed(title=current_event.name,
         description=f'Time Left: {days} Days, {hours} hours' +
-        f'{minutes} minutes, {seconds} seconds')
+        f' {minutes} minutes, {round(seconds)} seconds')
         embed.add_field(name='Event Cards', value='='*30)
 
         for card in event_cards:
