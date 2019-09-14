@@ -7,7 +7,8 @@ import config
 extensions = {
     'cogs.deresute',
     'cogs.development',
-    'cogs.info'
+    'cogs.info',
+    'cogs.anime'
 }
 class ShimamuBot(commands.AutoShardedBot):
     def __init__(self):
