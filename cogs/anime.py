@@ -10,6 +10,7 @@ class Anime(commands.Cog):
 
     @commands.command()
     async def anime(self, ctx, *, anime):
+        """Finds an anime and its information"""
         async with aiohttp.ClientSession() as s:
             async with s.get(f"{self.path}anime?filter[text]={anime}") as r:
                 response = await r.json()
@@ -22,6 +23,7 @@ class Anime(commands.Cog):
 
     @commands.command()
     async def manga(self, ctx, *, manga):
+        """Finds a manage and its information"""
         async with aiohttp.ClientSession() as s:
             async with s.get(f"{self.path}manga?filter[text]={manga}") as r:
                 response = await r.json()
@@ -34,6 +36,7 @@ class Anime(commands.Cog):
 
     @commands.command()
     async def search(self, ctx, Type, *, query):
+        """Lists results based on type and query"""
         async with aiohttp.ClientSession() as s:
             types = {
                 'anime': s.get(f"{self.path}anime?filter[text]={query}"),

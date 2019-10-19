@@ -11,6 +11,7 @@ class Deresute(commands.Cog):
 
     @commands.command()
     async def card(self, ctx, name, rarity, release):
+        """Find a card's information from the database"""
         client = Kirara()
         raw_rarity = rarity.replace('+', '')    
         card_id = await client.get_id('card_t', f' {name}', raw_rarity, int(release))
@@ -44,6 +45,7 @@ class Deresute(commands.Cog):
 
     @commands.command()
     async def cards(self, ctx, name, rarity):
+        """Lists cards in a specific rarity that an idol has"""
         client = Kirara()
         id_list = await client.get_id('card_t', f' {name}', rarity)
         card_list = await client.get_cards(id_list, en_translate=True)
@@ -61,6 +63,7 @@ class Deresute(commands.Cog):
 
     @commands.command()
     async def event(self, ctx):
+        """Show information about the current event (NOTE: Will only work with specfic events)"""
         client = Kirara()
         event = await client.get_now('event', en_translate=False)
         current_event = event[0]
