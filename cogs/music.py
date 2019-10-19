@@ -204,7 +204,7 @@ class Music(commands.Cog):
         await ctx.send('Disconnected player and killed controller.', delete_after=20)
 
     @commands.command()
-    async def search(self, ctx, *, query):
+    async def ytsearch(self, ctx, *, query):
         embed = discord.Embed(title=f"Search Results: {query}", color=0xd629c9)
         query = await self.bot.wavelink.get_tracks(f'ytsearch: {query}')
 
