@@ -169,9 +169,16 @@ class Music(commands.Cog):
             return await ctx.send('I am not currently playing anything!')
 
         controller = self.get_controller(ctx)
+        embed = discord.Embed(title=player.current.title, colour=0xd629c9)
+        embed.set_thumbnail(url=player.current.thumb)
+
+        minutes = round((player.current.length / 1000) / 60) 
+
+        embed.add_field(name="Length", value=f"{minutes} minutes")
+
         await controller.now_playing.delete()
 
-        controller.now_playing = await ctx.send(f'Now playing: `{player.current}`')
+        controller.now_playing = await ctx.send(embed=embed)
 
     @commands.command(aliases=['q'])
     async def queue(self, ctx):
