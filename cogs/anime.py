@@ -23,7 +23,7 @@ class Anime(commands.Cog):
 
     @commands.command()
     async def manga(self, ctx, *, manga):
-        """Finds a manage and its information"""
+        """Finds a manga and its information"""
         async with aiohttp.ClientSession() as s:
             async with s.get(f"{self.path}manga?filter[text]={manga}") as r:
                 response = await r.json()
@@ -46,7 +46,7 @@ class Anime(commands.Cog):
                 async with types.get(Type) as r:
                     responses = await r.json()
             else:
-                await ctx.send("Unknown attribute! Attribute can be text or genre!")
+                await ctx.send("Unknown attribute! Attribute can either be text or genre!")
         embed = discord.Embed(title=f"Results for {query}")
 
         for x, response in enumerate(responses['data']):
