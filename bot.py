@@ -9,7 +9,8 @@ extensions = {
     'cogs.development',
     'cogs.info',
     'cogs.anime',
-    'cogs.music'
+    'cogs.music',
+    'cogs.gbf'
 }
 class ShimamuBot(commands.AutoShardedBot):
     def __init__(self):
