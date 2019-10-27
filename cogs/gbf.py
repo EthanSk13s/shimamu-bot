@@ -34,9 +34,10 @@ class GBF(commands.Cog):
         page = wiki.get_page(query)
         url = await page.html()
 
-        summary = scrape.summary(url)
+        char = scrape.CharaScraper(url)
 
-        await ctx.send(summary)
+        await ctx.send(char.summary())
+        await wiki.close()
 
 def setup(bot):
     bot.add_cog(GBF(bot))
