@@ -1,8 +1,14 @@
-import discord
 import aiowiki
-import bs4 as bs
-
+import discord
 from discord.ext import commands
+
+# pylint throws an error if I do not include this try statement it's dumb...
+
+try:
+	from .utils import scrape
+except (SystemError, ImportError):
+	import scrape
+
 class Chara():
     def __init__(self, values: dict):
         self.name = values['name']
@@ -28,15 +34,9 @@ class GBF(commands.Cog):
         page = wiki.get_page(query)
         url = await page.html()
 
-        soup = bs.BeautifulSoup(url, 'lxml')
-        desc = soup.find('table', 
-        {'class':'wikitable',
-        'style': 'width:100%; text-align:center; text-size-adjust: none; margin-top:0;'}
-        )
-        pog = str(desc.find_all('td'))
-        thing = pog.strip('[').strip(']').strip('<td>').strip('</td>')
+        summary = scrape.summary(url)
 
-        await ctx.send(thing)
+        await ctx.send(summary)
 
 def setup(bot):
     bot.add_cog(GBF(bot))
