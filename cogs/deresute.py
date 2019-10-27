@@ -79,7 +79,7 @@ class Deresute(commands.Cog):
 
         embed=discord.Embed(title=current_event.name,
         description=f'Time Left: {days} Days, {hours} hours' +
-        f' {minutes} minutes, {round(seconds)} seconds')
+        f' {minutes} minutes, {round(seconds)} seconds', color=0xd629c9)
         embed.add_field(name='Event Cards', value='='*30)
 
         for card in event_cards:
