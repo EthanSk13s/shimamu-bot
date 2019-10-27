@@ -3,6 +3,15 @@ import aiowiki
 import bs4 as bs
 
 from discord.ext import commands
+class Chara():
+    def __init__(self, values: dict):
+        self.name = values['name']
+        self.desc = values['desc']
+        self.skills = values['skills']
+        self.image = values['image']
+        self.element = values['element']
+        self.hp = values['hp']
+        self.atk = values['atk']
 
 class GBF(commands.Cog):
     def __init__(self, bot):
@@ -28,5 +37,6 @@ class GBF(commands.Cog):
         thing = pog.strip('[').strip(']').strip('<td>').strip('</td>')
 
         await ctx.send(thing)
+
 def setup(bot):
     bot.add_cog(GBF(bot))
