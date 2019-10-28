@@ -28,7 +28,6 @@ class GBF(commands.Cog):
         embed = discord.Embed(title=f'{char.title()} {char.name()}',
         description=char.summary())
         embed.set_image(url=char.image())
-        print(char.title())
 
         await ctx.send(embed=embed)
         await wiki.close()
