@@ -9,16 +9,6 @@ try:
 except (SystemError, ImportError):
 	import scrape
 
-class Chara():
-    def __init__(self, values: dict):
-        self.name = values['name']
-        self.desc = values['desc']
-        self.skills = values['skills']
-        self.image = values['image']
-        self.element = values['element']
-        self.hp = values['hp']
-        self.atk = values['atk']
-
 class GBF(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -35,8 +25,12 @@ class GBF(commands.Cog):
         url = await page.html()
 
         char = scrape.CharaScraper(url)
+        embed = discord.Embed(title=f'{char.title()} {char.name()}',
+        description=char.summary())
+        embed.set_image(url=char.image())
+        print(char.title())
 
-        await ctx.send(char.summary())
+        await ctx.send(embed=embed)
         await wiki.close()
 
 def setup(bot):
