@@ -25,9 +25,16 @@ class GBF(commands.Cog):
         url = await page.html()
 
         char = scrape.CharaScraper(url)
+
         embed = discord.Embed(title=f'{char.title()} {char.name()}',
         description=char.summary())
         embed.set_image(url=char.image())
+        embed.set_thumbnail(url=char.element())
+
+        embed.add_field(name='Max HP', value=char.hp())
+        embed.add_field(name='Max ATK', value=char.atk())
+        embed.add_field(name='Skills',
+        value=f"\n".join(char.skills()))
 
         await ctx.send(embed=embed)
         await wiki.close()
