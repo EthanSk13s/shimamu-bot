@@ -16,11 +16,17 @@ class CharaScraper(Scraper):
 
     def title(self):
         title = self.soup.find('div', {'class': 'char-title'})
-        tl1 = "This character's title is untranslated."
-        tl2 = "This title is an unofficial, amateur translation."
-        tl3 = "This title is a translation sourced from Granblue Fantasy"
+        headers = {
+            'tl1': "This character's title is untranslated.",
+            'tl2': "This title is an unofficial, amateur translation.",
+            'tl3': "This title is a translation sourced from Granblue Fantasy"
+        }
+        for header in headers.values():
+            if header in title.text:
+                new_title = title.text.strip(header)
+                break
 
-        return title.text.strip(tl1).strip(tl2).strip(tl3)
+        return new_title
 
     def name(self):
         name = self.soup.find('div', {'class': 'char-name'})
