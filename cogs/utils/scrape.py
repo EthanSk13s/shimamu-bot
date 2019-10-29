@@ -46,6 +46,21 @@ class CharaScraper(Scraper):
 
         return f"https://gbf.wiki{img[0]['src']}"
 
-        
+    def skills(self):
+        table = self.soup.find_all('table', {'class': 'wikitable',
+        'style': 'width:100%; text-align:center; text-size-adjust: none;'})
 
+        raw_skills = table[1].find_all('td', {'class': 'skill-name'})
+        skills = []
 
+        for skill in raw_skills:
+            skills.append(skill.text)
+
+        return skills
+
+    def element(self):
+        table = self.soup.find('table', {'class': 'wikitable',
+        'style': 'width: 100%; text-align:center; margin-top:2px; margin-left:auto; margin-right:auto;'})
+
+        element = table.find('img')
+        return f"https://gbf.wiki{element['src']}"
