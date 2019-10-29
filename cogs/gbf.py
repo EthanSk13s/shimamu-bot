@@ -21,8 +21,8 @@ class GBF(commands.Cog):
     @gbf.command()
     async def chara(self, ctx, *, query):
         wiki = aiowiki.Wiki("https://gbf.wiki/api.php")
-        page = wiki.get_page(query)
-        url = await page.html()
+        pages = await wiki.opensearch(query)
+        url = await pages[0].html()
 
         char = scrape.CharaScraper(url)
 
