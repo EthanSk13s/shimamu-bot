@@ -70,3 +70,15 @@ class CharaScraper(Scraper):
 
         element = table.find('img')
         return f"https://gbf.wiki{element['src']}"
+
+class RaidScraper(Scraper):
+    def name(self):
+        raid_name = self.soup.find('div', {'style': 'position: relative'})
+
+        return raid_name.text.replace('Edit battle', "")
+
+    def cost(self):
+        cost = self.soup.find('td', {'style': 'width: 33%'})
+
+        return cost.text.replace("Cost to Host:", "") 
+
