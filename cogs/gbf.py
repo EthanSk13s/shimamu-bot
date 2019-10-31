@@ -39,5 +39,21 @@ class GBF(commands.Cog):
         await ctx.send(embed=embed)
         await wiki.close()
 
+    @gbf.command()
+    async def raid(self, ctx, query, difficulty):
+        wiki = aiowiki.Wiki("https://gbf.wiki/api.php")
+        pages = await wiki.opensearch(query)
+        url = None
+
+        for page in pages:
+            if 'raid' in page.title.lower():
+                url = await page.html()
+                break
+
+        raid = scrape.RaidScraper(url)
+        await ctx.send(raid.name())
+        await ctx.send(raid.cost())
+        await wiki.close() 
+
 def setup(bot):
     bot.add_cog(GBF(bot))
