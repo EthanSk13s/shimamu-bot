@@ -72,13 +72,42 @@ class CharaScraper(Scraper):
         return f"https://gbf.wiki{element['src']}"
 
 class RaidScraper(Scraper):
-    def name(self):
-        raid_name = self.soup.find('div', {'style': 'position: relative'})
+    def __init__(self, url, difficulty: str):
+        super().__init__(url)
 
-        return raid_name.text.replace('Edit battle', "")
+        self.diff = difficulty.capitalize()
+        self.tables = self.soup.find('div', {'class': 'tabbertab',
+        'title': self.diff})
+
+    def name(self):
+        raid_name = self.tables.find('div', {'style': 'position: relative'})
+
+        return raid_name.text.replace('Edit battle', '')
 
     def cost(self):
-        cost = self.soup.find('td', {'style': 'width: 33%'})
+        cost = self.tables.find('td', {'style': 'width: 33%'})
 
-        return cost.text.replace("Cost to Host:", "") 
+        return cost.text.replace("Cost to Host:", '') 
+
+    def unlock(self):
+        table = self.tables.find('table', {'class': 'wikitable',
+        'style': 'width: 100%; margin-bottom: 0;'})
+
+        unlock = table.find_all('td', {'style': 'width: 33%'})
+
+        return unlock[2].text.replace('Unlock:', '')
+
+    def location(self):
+        table = self.tables.find('table', {'class': 'wikitable',
+        'style': 'width: 100%; margin-bottom: 0;'})
+
+        location = table.find_all('td', {'colspan': True})
+
+        return location[0].text.replace('Location:', '')
+
+    def image(self):
+        image = self.tables.find('img', {'width': '180', 'height': '126'})
+
+        return f"https://gbf.wiki{image['src']}"
+
 
