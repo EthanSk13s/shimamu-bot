@@ -12,15 +12,6 @@ except (SystemError, ImportError):
 class GBF(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.diffs = {
-            'normal': '#Normal',
-            'hard': '#Hard',
-            'hard+': '#Hard.2B',
-            'extreme': '#Extreme',
-            'extreme+': '#Extreme.2B',
-            'impossible': '#Impossible',
-            'impossible (hard)': '#Impossible_.28Hard.29'
-        }
 
     @commands.group()
     async def gbf(self, ctx):
