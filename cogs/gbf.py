@@ -31,10 +31,10 @@ class GBF(commands.Cog):
         embed.set_image(url=char.image())
         embed.set_thumbnail(url=char.element())
 
-        embed.add_field(name='Max HP', value=char.hp())
-        embed.add_field(name='Max ATK', value=char.atk())
+        embed.add_field(name='Max HP', value=char.hp(), inline=False)
+        embed.add_field(name='Max ATK', value=char.atk(), inline=False)
         embed.add_field(name='Skills',
-        value=f"\n".join(char.skills()))
+        value=f"\n".join(char.skills()), inline=False)
 
         await ctx.send(embed=embed)
         await wiki.close()

@@ -28,14 +28,14 @@ class Deresute(commands.Cog):
             embed.set_image(url=idol.spread)
 
         embed.add_field(name=f"Lead Skill: {idol.lead_skill.name}",
-        value=idol.lead_skill.en_explain, inline=True)
+        value=idol.lead_skill.en_explain, inline=False)
 
         embed.add_field(name='Vocal', value=idol.max_vocal, inline=True)
         embed.add_field(name='Dance', value=idol.max_dance, inline=True)
         embed.add_field(name='Visual', value=idol.max_visual, inline=True)
         embed.add_field(name='HP', value=idol.max_hp, inline=True)
         embed.add_field(name=f"Skill: {idol.skill.skill_type}",
-        value=idol.skill.en_explain, inline=True)
+        value=idol.skill.en_explain, inline=False)
 
         embed.set_footer(text=f"Card ID: {idol.card_id}")
 
