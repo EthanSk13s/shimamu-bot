@@ -1,7 +1,14 @@
 import itertools
 
 import discord
+import aiohttp
 from discord.ext import commands
+from functools import partial
+
+try:
+    from .utils import misc
+except (SystemError, ImportError):
+    import misc
 
 class Info(commands.Cog):
     def __init__(self, bot):
@@ -33,6 +40,23 @@ class Info(commands.Cog):
         avatar_url = h.avatar_url_as(format="png")
 
         await ctx.send(avatar_url)
+
+    @commands.command()
+    async def wal(self, ctx):
+        async with ctx.typing():
+            attachment = ctx.message.attachments
+
+            async with aiohttp.ClientSession() as session:
+                async with session.get(attachment[0].url) as c:
+                    image = await c.read()
+
+                    fn = partial(misc.generate, image)
+
+                    buffer = await self.bot.loop.run_in_executor(None, fn)
+
+                    file = discord.File(filename="rgb.png", fp=buffer)
+
+                    await ctx.send(file=file)
 
 def setup(bot):
     bot.add_cog(Info(bot))
