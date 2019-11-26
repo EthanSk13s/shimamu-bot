@@ -1,0 +1,1 @@
+This folder is for any files that are only going to be used temporary and will be deleted after use
