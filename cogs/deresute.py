@@ -84,7 +84,8 @@ class Deresute(commands.Cog):
 
         for card in event_cards:
             embed.add_field(name=f'[{card.title}] {card.conventional}',
-            value=f'Lead Skill: {card.lead_skill.en_explain}')
+            value=f'Lead Skill: {card.lead_skill.en_explain}',
+            inline=False)
 
         await ctx.send(embed=embed) 
         
