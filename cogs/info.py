@@ -42,12 +42,15 @@ class Info(commands.Cog):
         await ctx.send(avatar_url)
 
     @commands.command()
-    async def wal(self, ctx):
+    async def wal(self, ctx, link=None):
         async with ctx.typing():
-            attachment = ctx.message.attachments
+            if link is None:
+                attachment = ctx.message.attachments[0].url
+            else:
+                attachment = link
 
             async with aiohttp.ClientSession() as session:
-                async with session.get(attachment[0].url) as c:
+                async with session.get(attachment) as c:
                     image = await c.read()
 
                     fn = partial(misc.generate, image)
