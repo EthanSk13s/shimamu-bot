@@ -69,7 +69,7 @@ class Deresute(commands.Cog):
         current_event = event[0]
 
         currently = datetime.utcnow().timestamp()
-        remaining = ((current_event.end_date + 32400) - currently) - 7200
+        remaining = ((current_event.end_date + 32400) - currently) - 3600
         hours, remainder = divmod(remaining, 3600)
         minutes, seconds = divmod(remainder, 60)
         days, hours = divmod(hours, 24)
