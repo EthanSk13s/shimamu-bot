@@ -1,7 +1,6 @@
 import os
 import shutil
 
-import numpy as np
 import pywal as wal
 
 from PIL import Image
@@ -24,8 +23,6 @@ def generate(image: bytes):
     for color in colors.values():
         rgb = tuple(int(color.lstrip('#')[i:i+2], 16) for i in (0, 2, 4))
         color_list.append(rgb)
-
-    
 
     im = Image.new('RGB', [16, 1])
     im.putdata(color_list)
