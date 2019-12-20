@@ -1,5 +1,6 @@
 import discord
 import asyncKirara
+import aiohttp
 from discord.ext import commands
 
 import config
@@ -28,6 +29,7 @@ class ShimamuBot(commands.AutoShardedBot):
                 print('load fail')
 
     async def on_ready(self):
+        self.session = aiohttp.ClientSession(loop=self.loop)
         print('Ganbarimasu!')
 
     def run(self):
