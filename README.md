@@ -24,4 +24,8 @@ token = '' # Your bot's token here
 - Discord.py
 - async-Kirara
 - wavelink + a lavalink server
+- [aiowiki](https://github.com/Gelbpunkt/aiowiki)
+- pywal
+- pillow
+- beautifulsoup4
 
