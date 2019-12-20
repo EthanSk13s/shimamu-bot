@@ -49,17 +49,16 @@ class Info(commands.Cog):
             else:
                 attachment = link
 
-            async with aiohttp.ClientSession() as session:
-                async with session.get(attachment) as c:
-                    image = await c.read()
+            async with self.bot.session.get(attachment) as c:
+                image = await c.read()
 
-                    fn = partial(misc.generate, image)
+                fn = partial(misc.generate, image)
 
-                    buffer = await self.bot.loop.run_in_executor(None, fn)
+                buffer = await self.bot.loop.run_in_executor(None, fn)
 
-                    file = discord.File(filename="rgb.png", fp=buffer)
+                file = discord.File(filename="rgb.png", fp=buffer)
 
-                    await ctx.send(file=file)
+                await ctx.send(file=file)
 
 def setup(bot):
     bot.add_cog(Info(bot))
