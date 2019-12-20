@@ -11,9 +11,9 @@ class Anime(commands.Cog):
     @commands.command()
     async def anime(self, ctx, *, anime):
         """Finds an anime and its information"""
-        async with aiohttp.ClientSession() as s:
-            async with s.get(f"{self.path}anime?filter[text]={anime}") as r:
-                response = await r.json()
+        url = f"{self.path}anime?filter[text]={anime}"
+        async with self.bot.session.get(url) as s:
+            response = await s.json()
 
         embed = discord.Embed(title=response['data'][0]['attributes']['canonicalTitle'],
         description=response['data'][0]['attributes']['synopsis'])
@@ -24,9 +24,9 @@ class Anime(commands.Cog):
     @commands.command()
     async def manga(self, ctx, *, manga):
         """Finds a manga and its information"""
-        async with aiohttp.ClientSession() as s:
-            async with s.get(f"{self.path}manga?filter[text]={manga}") as r:
-                response = await r.json()
+        url = f"{self.path}manga?filter[text]={manga}"
+        async with self.bot.session.get(url) as s:
+            response = await s.json()
 
         embed = discord.Embed(title=response['data'][0]['attributes']['canonicalTitle'],
         description=response['data'][0]['attributes']['synopsis'])
@@ -37,16 +37,15 @@ class Anime(commands.Cog):
     @commands.command()
     async def search(self, ctx, Type, *, query):
         """Lists results based on type and query"""
-        async with aiohttp.ClientSession() as s:
-            types = {
-                'anime': s.get(f"{self.path}anime?filter[text]={query}"),
-                'manga': s.get(f"{self.path}manga?filter[text]={query}")
-            }
-            if Type in types:
-                async with types.get(Type) as r:
-                    responses = await r.json()
-            else:
-                await ctx.send("Unknown attribute! Attribute can either be text or genre!")
+        types = {
+            'anime': f"{self.path}anime?filter[text]={query}",
+            'manga': f"{self.path}manga?filter[text]={query}"
+        }
+        if Type in types:
+            async with self.bot.session.get(types.get(Type)) as s:
+                responses = await s.json()
+        else:
+            await ctx.send("Unknown attribute! Attribute can either be text or genre!")
         embed = discord.Embed(title=f"Results for {query}")
 
         for x, response in enumerate(responses['data']):
