@@ -43,6 +43,7 @@ class QueueControl:
 
             await self.next.wait()
 
+
 class Music(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -51,8 +52,7 @@ class Music(commands.Cog):
         if not hasattr(bot, 'wavelink'):
             self.bot.wavelink = wavelink.Client(self.bot)
 
-        self.bot.loop.create_task(self.start_nodes())
-        
+        self.bot.loop.create_task(self.start_nodes())        
     async def start_nodes(self):
         await self.bot.wait_until_ready()
 
@@ -218,8 +218,6 @@ class Music(commands.Cog):
         for track in query[0:9]:
             embed.add_field(name=f"{track}", value=u'\u200b', inline=False)
 
-        await ctx.send(embed=embed)
-
-        
+        await ctx.send(embed=embed)       
 def setup(bot):
     bot.add_cog(Music(bot))

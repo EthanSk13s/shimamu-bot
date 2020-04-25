@@ -63,7 +63,8 @@ class Deresute(commands.Cog):
 
     @commands.command()
     async def event(self, ctx):
-        """Show information about the current event (NOTE: Will only work with specfic events)"""
+        """Show information about the current event 
+        (NOTE: Will only work with specfic events)"""
         client = Kirara()
         event = await client.get_now('event', en_translate=False)
         current_event = event[0]
@@ -87,8 +88,7 @@ class Deresute(commands.Cog):
             value=f'Lead Skill: {card.lead_skill.en_explain}',
             inline=False)
 
-        await ctx.send(embed=embed) 
-        
+        await ctx.send(embed=embed)        
 
 def setup(bot):
     bot.add_cog(Deresute(bot))

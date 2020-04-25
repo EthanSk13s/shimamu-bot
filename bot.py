@@ -13,6 +13,8 @@ extensions = {
     'cogs.music',
     'cogs.gbf'
 }
+
+
 class ShimamuBot(commands.AutoShardedBot):
     def __init__(self):
         super().__init__(command_prefix='u!', description="Ganbarimasu!")
@@ -34,6 +36,7 @@ class ShimamuBot(commands.AutoShardedBot):
 
     def run(self):
         super().run(config.token, reconnect=True)
+
 
 bot = ShimamuBot()
 bot.run()

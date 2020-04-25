@@ -5,9 +5,9 @@ from discord.ext import commands
 # pylint throws an error if I do not include this try statement it's dumb...
 
 try:
-	from .utils import scrape
+    from .utils import scrape
 except (SystemError, ImportError):
-	import scrape
+    import scrape
 
 class GBF(commands.Cog):
     def __init__(self, bot):
